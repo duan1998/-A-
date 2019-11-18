@@ -7,7 +7,6 @@ public class MoveAction : Action
 
     public int m_moveRange;
 
-    public PlayerCtrl m_playerCtrl;
 
 
 
@@ -18,8 +17,9 @@ public class MoveAction : Action
         base.UseAction(dice);
         //PlayerMove
         m_playerCtrl.PrepareMove(dice.m_value);
+    
 
-        
+
     }
     public override void CancelOperation(Dice dice)
     {

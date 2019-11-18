@@ -23,7 +23,7 @@ public abstract class Action : MonoBehaviour
 
     public ActionName m_actionName;
 
-    
+    public PlayerCtrl m_playerCtrl;
 
     public virtual void UseAction(Dice dice)
     {
@@ -54,13 +54,14 @@ public abstract class Action : MonoBehaviour
     public virtual void CancelOperation(Dice dice)
     {
         dice.m_trans.position = dice.m_lastPosition;
+        m_playerCtrl.m_currentPlayerActionType = PlayerActionType.Null;
         m_isUsed = false;
 
 
     }
     public virtual void OverAction(Dice dice)
     {
-        
+        m_playerCtrl.m_currentPlayerActionType = PlayerActionType.Null;
     }
 
 }

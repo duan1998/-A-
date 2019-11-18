@@ -4,10 +4,10 @@ using UnityEngine;
 
 public enum PlayerActionType
 {
+    Null,
     CanMove,
     CanAttack,
-    CanAddOne,
-    Null
+    CanAddNumber
 }
 
 public class PlayerCtrl : MonoBehaviour
@@ -83,7 +83,7 @@ public class PlayerCtrl : MonoBehaviour
                         }
                         break;
                     }
-                case PlayerActionType.CanAddOne:
+                case PlayerActionType.CanAddNumber:
                     {
                         if (Input.GetMouseButtonDown(0))
                         {

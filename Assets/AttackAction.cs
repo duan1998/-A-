@@ -6,7 +6,6 @@ public class AttackAction : Action
 {
     public int m_attackDamage;
 
-    public PlayerCtrl m_playerCtrl;
 
     
 

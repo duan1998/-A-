@@ -2734,6 +2734,7 @@ GameObject:
   - component: {fileID: 218393033}
   - component: {fileID: 218393035}
   - component: {fileID: 218393034}
+  - component: {fileID: 218393036}
   m_Layer: 5
   m_Name: Bg
   m_TagString: Untagged
@@ -2800,6 +2801,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218393032}
   m_CullTransparentMesh: 0
+--- !u!95 &218393036
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218393032}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2f813295a5664c94484fd79d5f533866, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &224037582
 GameObject:
   m_ObjectHideFlags: 0
@@ -6499,8 +6519,8 @@ MonoBehaviour:
   m_isUsed: 0
   m_maskImage: {fileID: 1249391787}
   m_actionName: 1
-  m_attackDamage: 0
   m_playerCtrl: {fileID: 1348682723}
+  m_attackDamage: 0
 --- !u!1 &503086650
 GameObject:
   m_ObjectHideFlags: 0
@@ -12912,8 +12932,10 @@ MonoBehaviour:
   m_isUsed: 0
   m_maskImage: {fileID: 2065777020}
   m_actionName: 2
+  m_playerCtrl: {fileID: 1348682723}
   m_addDiceNumber: 1
   m_diceOriginalValue: 0
+  m_anim: {fileID: 218393036}
 --- !u!1 &1104759108
 GameObject:
   m_ObjectHideFlags: 0
@@ -15560,7 +15582,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1345718748
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15813,7 +15835,7 @@ MonoBehaviour:
   m_moveSpeed: 10
   m_isCanAction: 0
   m_isDragDice: 0
-  m_currentPlayerActionType: 2
+  m_currentPlayerActionType: 0
   m_actionCtrl: {fileID: 1345718750}
 --- !u!1 &1350475482
 GameObject:
@@ -20041,8 +20063,8 @@ MonoBehaviour:
   m_isUsed: 0
   m_maskImage: {fileID: 782828434}
   m_actionName: 0
-  m_moveRange: 0
   m_playerCtrl: {fileID: 1348682723}
+  m_moveRange: 0
 --- !u!1 &1691375414
 GameObject:
   m_ObjectHideFlags: 0
