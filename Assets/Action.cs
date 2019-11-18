@@ -5,27 +5,33 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
-public enum ActionType
+public enum ActionName
 {
     Move,
     Attack,
-    AddDiceNumber
+    AddOne
 }
 public abstract class Action : MonoBehaviour
 {
 
-
-
+    public ActionCtrl m_actionCtrl;
+    public DiceCtrl m_diceCtrl;
     //是否已经被使用过
     public bool m_isUsed;
 
     public Image m_maskImage;
 
-    public ActionType m_actionType;
+    public ActionName m_actionName;
 
+    
 
+    public virtual void UseAction(Dice dice)
+    {
+        dice.m_trans.position = this.transform.position;
 
-    public abstract void UseAction(Transform targetDiceTrans, int diceNumber);
+        m_isUsed = true;
+        m_actionCtrl.DiceIntoTheActionUI(this,dice);
+    }
 
     public void DiceUIEnterHovered()
     {
@@ -43,4 +49,18 @@ public abstract class Action : MonoBehaviour
             m_maskImage.enabled = false;
         }
     }
+
+    
+    public virtual void CancelOperation(Dice dice)
+    {
+        dice.m_trans.position = dice.m_lastPosition;
+        m_isUsed = false;
+
+
+    }
+    public virtual void OverAction(Dice dice)
+    {
+        
+    }
+
 }

@@ -26,6 +26,8 @@ public class GameUI : MonoBehaviour
         m_actorText.text ="第"+GameManager.Instance._CurrentTurnNumber.ToString()+"回合\n"+@"当前行动方:<color=""red"">玩家</color>";
         m_endTurnbutton.interactable = true;
         m_skillRootObj.SetActive(true);
+        for (int i = 0; i < m_skillRootObj.transform.childCount; i++)
+            m_skillRootObj.transform.GetChild(i).gameObject.SetActive(true);
         
     }
     void SwitchToAIAction()

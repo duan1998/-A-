@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+
+
 public class DiceDrag : MonoBehaviour,IDragHandler,IEndDragHandler,IBeginDragHandler
 {
 
@@ -12,9 +14,22 @@ public class DiceDrag : MonoBehaviour,IDragHandler,IEndDragHandler,IBeginDragHan
 
     public DiceCtrl m_diceCtrl;
 
+    public int m_diceIndex;
+
+    public ActionCtrl m_actionCtrl;
+
+    private void Start()
+    {
+        
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+
+        m_actionCtrl.CancelAction();
         transform.SetAsLastSibling();
+        m_diceCtrl._Dices[m_diceIndex].m_trans = this.transform;
+        m_diceCtrl._Dices[m_diceIndex].m_lastPosition = this.transform.position;
     }
 
     Action m_hoverdAction=null;
@@ -65,7 +80,10 @@ public class DiceDrag : MonoBehaviour,IDragHandler,IEndDragHandler,IBeginDragHan
         {
             if (resultList[i].gameObject.GetComponent<Action>() != null)
             {
-                resultList[i].gameObject.GetComponent<Action>().UseAction(this.transform, m_diceCtrl._DiceNumbers[transform.GetOrderOfBrother()]);
+
+
+                //是最顶部，所以是最大数-1
+                resultList[i].gameObject.GetComponent<Action>().UseAction(m_diceCtrl._Dices[m_diceIndex]);
                 break;
             }
         }

@@ -30,6 +30,7 @@ public class DiceUI : MonoBehaviour
             m_diceTexts[i].transform.parent.gameObject.SetActive(true);
             m_diceTexts[i].text = diceNumber[i].ToString();
             m_diceTexts[i].transform.parent.position = m_dicePositions[i];
+            m_diceTexts[i].GetComponentInParent<DiceDrag>().m_diceIndex = i;
         }
     
     }

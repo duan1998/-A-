@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum Actors
 {
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     public PlayerCtrl m_playerCtrl;
     public AICtrl m_aiCtrl;
 
+    public ActionCtrl m_actionCtrl;
 
     public void StartGame()
     {
@@ -59,6 +61,8 @@ public class GameManager : MonoBehaviour
         m_currentActor = actor;
         m_currentTurnNumber++;
         m_GameUI.SetActonUI(m_currentActor);
+
+        m_actionCtrl.InitActionState();
         if (m_currentActor == Actors.Player)
         {
             m_playerCtrl.m_isCanAction = true;
@@ -70,6 +74,11 @@ public class GameManager : MonoBehaviour
             m_aiCtrl.m_isCanAction = true;
         }
 
+    }
+
+    public void ReStart()
+    {
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
 }

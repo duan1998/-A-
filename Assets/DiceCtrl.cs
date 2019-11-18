@@ -2,42 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+public class Dice
+{
+    public Transform m_trans;
+    public Vector3 m_lastPosition;
+    public int m_index;
+    public int m_value;
+}
 public class DiceCtrl : MonoBehaviour
 {
 
-    private int[] m_diceNumbers;
+    private Dice[] m_dices;
     public DiceUI m_diceUI;
 
-    public int[] _DiceNumbers
+    public Dice[] _Dices
     {
-        get { return m_diceNumbers; }
+        get
+        {
+            if(m_dices==null)
+            {
+                m_dices= new Dice[3];
+                for (int i = 0; i < m_dices.Length; i++)
+                {
+                    m_dices[i] = new Dice();
+                    m_dices[i].m_index = i;
+                }
+            }
+            return m_dices;
+        }
+        set
+        {
+            m_dices = value;
+        }
     }
-
-
-    private void Start()
-    {
-        m_diceNumbers = new int[3];
-    }
-
 
     /// <summary>
     /// 获取三个随机数
     /// </summary>
     public void GetNewThreeDice()
     {
-        m_diceNumbers[0] = Random.Range(1, 7);
-        m_diceNumbers[1] = Random.Range(1, 7);
-        m_diceNumbers[2] = Random.Range(1, 7);
-        m_diceUI.UpdateDiceUIInNextTurn(m_diceNumbers);
+        int[] diceNumbers = new int[_Dices.Length];
+        for(int i=0;i< _Dices.Length;i++)
+        {
+            m_dices[i].m_value = Random.Range(1, 7);
+            diceNumbers[i] = _Dices[i].m_value;
+        }
+        m_diceUI.UpdateDiceUIInNextTurn(diceNumbers);
     }
-
-    public void DiceAddNumber(int index,int value) 
+    public void ModifyDiceNumber(int index,int value)
     {
-        m_diceNumbers[index] += value;
-        if (m_diceNumbers[index] > 6)
-            m_diceNumbers[index] = 6;
-        m_diceUI.UpdateDiceUIInCurrentTurn(m_diceNumbers);
-
+        int[] diceNumbers = new int[_Dices.Length];
+        m_dices[index].m_value=Mathf.Clamp(value,1,6);
+        for (int i = 0; i < _Dices.Length; i++)
+        {
+            diceNumbers[i] = _Dices[i].m_value;
+        }
+        m_diceUI.UpdateDiceUIInCurrentTurn(diceNumbers);
     }
 
 

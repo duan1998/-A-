@@ -9,22 +9,27 @@ public class MoveAction : Action
 
     public PlayerCtrl m_playerCtrl;
 
-    private void Start()
-    {
-        m_actionType = ActionType.Move;
-    }
 
-    public override void UseAction(Transform targetDiceTrans, int diceNumber)
+
+    public override void UseAction(Dice dice)
     {
         if (m_isUsed)
             return;
-        targetDiceTrans.position = this.transform.position;
-        targetDiceTrans.GetComponent<DiceDrag>().HideDiceUI();
-        m_isUsed = true;
-
+        base.UseAction(dice);
         //PlayerMove
-        m_playerCtrl.Move(diceNumber);
+        m_playerCtrl.PrepareMove(dice.m_value);
 
-        this.gameObject.transform.parent.gameObject.SetActive(false);
+        
+    }
+    public override void CancelOperation(Dice dice)
+    {
+        base.CancelOperation(dice);
+        MapMgr.Instance.HideWaleableItem();
+    }
+
+    public override void OverAction(Dice dice)
+    {
+        base.OverAction(dice);
+        dice.m_trans.gameObject.SetActive(false);
     }
 }

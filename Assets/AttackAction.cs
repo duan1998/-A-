@@ -8,22 +8,29 @@ public class AttackAction : Action
 
     public PlayerCtrl m_playerCtrl;
 
-    private void Start()
-    {
-        m_actionType = ActionType.Attack;
-    }
+    
 
-    public override void UseAction(Transform targetDiceTrans, int diceNumber)
+    public override void UseAction(Dice dice)
     {
         if (m_isUsed)
             return;
-        targetDiceTrans.GetComponent<DiceDrag>().HideDiceUI();
-        targetDiceTrans.position = this.transform.position;
-        m_isUsed = true;
-
+        base.UseAction(dice);
         //PlayerMove
-        m_playerCtrl.Attack(diceNumber);
-        this.gameObject.transform.parent.gameObject.SetActive(false);
+        m_playerCtrl.PrepareAttack(dice.m_value);
+        
+        
+
+    }
+    public override void CancelOperation(Dice dice)
+    {
+        base.CancelOperation(dice);
+        MapMgr.Instance.HideAttackableItem();
+    }
+
+    public override void OverAction(Dice dice)
+    {
+        base.OverAction(dice);
+        dice.m_trans.gameObject.SetActive(false);
     }
 }
 
